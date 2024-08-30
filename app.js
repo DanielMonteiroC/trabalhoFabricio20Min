@@ -1,5 +1,5 @@
 const express = require('express');
-const sequelize = require('./confg/database');
+const sequelize = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 

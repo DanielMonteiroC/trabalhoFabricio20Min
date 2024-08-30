@@ -45,6 +45,24 @@ const listUsers = async (req, res) => {
     }
 };
 
+const updateUser = async (req, res) => {
+    try {
+      const { username, email } = req.body;
+      const user = await User.findByPk(req.params.id);
+  
+      if (!user || user.id !== req.userId) {
+        return res.status(403).json({ error: 'Acesso negado.' });
+      }
+  
+      user.username = username;
+      user.email = email;
+      await user.save();
+      res.json({ message: 'Usuário atualizado com sucesso.' });
+    } catch (error) {
+      res.status(400).json({ error: 'Erro ao atualizar usuário.' });
+    }
+  };
+
 const deleteUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
